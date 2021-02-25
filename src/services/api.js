@@ -1,5 +1,9 @@
-import { create } from 'axios';
+import {
+    create
+} from 'axios';
 
-export default create({
-    baseUrl: 'https://api.github.com'
+const api = create({
+    baseURL: 'https://api.github.com/users'
 });
+
+export default api;
