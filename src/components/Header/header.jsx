@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col, Container } from 'reactstrap';
+import {IoReturnUpBack} from 'react-icons/all';
 import { useHistory } from 'react-router-dom';
 
 
@@ -14,6 +15,13 @@ const Header = () => {
             <Container fluid="xl">
                 <Col xs={12} className="header">
                     <img src={LogoBranco} alt="Compasso Uol Logo" className="logo" onClick={() => history.push("/")} />
+                    {
+                        history.location.pathname === '/'
+                        ?
+                        ''
+                        :
+                        <IoReturnUpBack className="return" onClick={() => history.push("/")} />
+                    }
                 </Col>
             </Container>
         </header>

@@ -1,18 +1,23 @@
 header {
+    background: linear-gradient(180deg, #242021 11.05%, rgba(66, 62, 63, .7) 64.89%, rgba(66, 62, 63, 0));
+    height: fit-content;
     position: fixed;
     top: 0;
-    background: linear-gradient(180deg, #242021 11.05%, rgba(66, 62, 63, .7) 64.89%, rgba(66, 62, 63, 0));
     width: 100%;
-    height: fit-content;
     z-index: 10;
 
     .header {
         margin: 28px 0;
 
         .logo {
+            cursor: pointer;
             max-width: max-content;
             height: auto;
-            cursor: pointer;
+        }
+
+        .return {
+            float: right;
+            font-size: 34px;
         }
     }
 }

@@ -7,11 +7,11 @@ import LogoBranco from '../../assets/LogoCompasso-branco.webp';
 const Footer = () => {
     return (
         <footer>
-            <Container fluid="xl">
-                <Col xs={3}>
+            <Container fluid="xl" className="footer">
+                <Col md={4} xs={12}>
                     <img src={LogoBranco} alt="Compasso Uol Logo" className="logo" />
                 </Col>
-                <Col xs={9}>
+                <Col md={8} xs={12}>
                     <h3>Busca por usuário</h3>
                     <p>
                         Essa aplicação tem como função buscar por um usuário especifico para visualização de repositorios e favoritos. <br/>

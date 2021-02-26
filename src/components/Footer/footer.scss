@@ -1,6 +1,16 @@
 footer {
-    position: relative;
-    bottom: 0;
-    margin: 24px auto;
     background-color: #231f20;
+    bottom: 0;
+    margin-top: 25px;
+    padding: 70px 0 34px 0;
+    position: relative;
+    
+    .footer {
+        display: grid;
+        row-gap: 25px;
+
+        @media(min-width: 768px) {
+            display: flex;
+        }
+    }
 }

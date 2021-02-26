@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container } from 'reactstrap';
+import { Button, Container, Spinner } from 'reactstrap';
+import {AiOutlineStar} from 'react-icons/ai'
 import { useParams } from 'react-router-dom';
 
 import api from '../../services/api';
@@ -10,34 +11,60 @@ import './search.scss';
 function Search() {
   const [info, setInfo] = useState([]);
   const [repos, setRepos] = useState([]);
+  const [exist, setExist] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [typereq, setTypereq] = useState('');
   const { user } = useParams();
 
   useEffect(() => {
 
     api.get(`/${user}`).then(res => {
-      console.log(res.data)
       setInfo(res.data);
-      console.log(info);
+      setLoading(false);
     });
 
   }, []);
 
   function reposUser(param) {
+    setLoading(true);
     api.get(`/${param}/repos`).then(res => {
-      console.log(res.data);
+      if(res.data.length === 0){
+        setTypereq('Repos');
+        setExist(true);
+      } else {
+        setExist(false);
+      }
       setRepos(res.data);
+      setLoading(false);
     });
   }
 
   function starredUser(param) {
+    setLoading(true);
     api.get(`/${param}/starred`).then(res => {
-      console.log(res);
+      if(res.data.length === 0){
+        setTypereq('Starred');
+        setExist(true);
+      } else {
+        setExist(false);
+      }
+      setRepos(res.data);
+      setLoading(false);
     })
   }
 
   return (
     <div className="content">
       <Header />
+      {
+        loading
+        ?
+        <div className="loading">
+          <Spinner color="warning" />
+        </div>
+        :
+        ''
+      }
       <Container fluid="xl" className="container-main">
         <div className="info-user">
           <div className="container-user">
@@ -48,6 +75,7 @@ function Search() {
             <div className="apresentation-action">
               <p>
                 A aplicação atual tem como objetivo apresentar informações básicas sobre o usuário buscado, seus repositórios e favoritos.
+                Para visualizar os repositórios do usuário basta clicar em Repos e para vizualizar os favoritos do usuário basta clicar em Starred.
                 Para vizualizar o perfil completo do usuário recomendamos o acesso no Github clicando <a href={info.html_url}>aqui</a>.
               </p>
             </div>
@@ -59,11 +87,28 @@ function Search() {
         </div>
         <div className="repos-container">
           {
+            exist
+            ?
+            <div className="repos-notfound">
+              <p>Infelizmente esse usuário não possui {typereq} ainda.</p>
+            </div>
+            :
+            ''
+          }
+          {
             repos.map(repo => (
               <div key={repo.id} className="repo-item">
-                <p>{repo.name}</p>
-                <p>{repo.language}</p>
-                <p>{repo.description != null ? repo.description : ''}</p>
+                <div className="repo-name">
+                  <h3>{repo.name}</h3>
+                </div>
+                <div className="repo-description">
+                  <p>{repo.description != null ? repo.description : ''}</p>
+                </div>
+                <div className="repo-infos">
+                  <p className="lang">{repo.language}</p>
+                  <p className="fork">Fork: {repo.forks}</p>
+                  <p className="starred"><AiOutlineStar /> {repo.watchers}</p>
+                </div>
               </div>
             ))
           }

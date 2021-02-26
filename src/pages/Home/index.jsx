@@ -21,10 +21,15 @@ function Home() {
         <div className="content">
             <Header />
             <Container fluid="xl" className="container-main">
-                <Form className="search-container">
-                    <Input type="text" name="user" value={search} onChange={(e) => setSearch(e.target.value)} id="user" placeholder="Insira o usuário" />
-                    <Button className="search" onClick={() => goSearch()}><FaSearch /></Button>
-                </Form>
+                <div className="main">
+                    <h2>
+                        Buscador de usuários no Github!
+                    </h2>
+                    <Form className="search-container">
+                        <Input type="text" name="user" value={search} onChange={(e) => setSearch(e.target.value)} id="user" placeholder="Insira o usuário" />
+                        <Button className="search" onClick={() => goSearch()}><FaSearch /></Button>
+                    </Form>
+                </div>
             </Container>
             <Footer />
         </div>
