@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Container, Spinner } from 'reactstrap';
-import {AiOutlineStar} from 'react-icons/ai'
+import { AiOutlineStar } from 'react-icons/ai'
 import { useParams } from 'react-router-dom';
 
 import api from '../../services/api';
@@ -28,7 +28,7 @@ function Search() {
   function reposUser(param) {
     setLoading(true);
     api.get(`/${param}/repos`).then(res => {
-      if(res.data.length === 0){
+      if (res.data.length === 0) {
         setTypereq('Repos');
         setExist(true);
       } else {
@@ -42,7 +42,7 @@ function Search() {
   function starredUser(param) {
     setLoading(true);
     api.get(`/${param}/starred`).then(res => {
-      if(res.data.length === 0){
+      if (res.data.length === 0) {
         setTypereq('Starred');
         setExist(true);
       } else {
@@ -58,12 +58,12 @@ function Search() {
       <Header />
       {
         loading
-        ?
-        <div className="loading">
-          <Spinner color="warning" />
-        </div>
-        :
-        ''
+          ?
+          <div className="loading">
+            <Spinner color="warning" />
+          </div>
+          :
+          ''
       }
       <Container fluid="xl" className="container-main">
         <div className="info-user">
@@ -88,12 +88,12 @@ function Search() {
         <div className="repos-container">
           {
             exist
-            ?
-            <div className="repos-notfound">
-              <p>Infelizmente esse usuário não possui {typereq} ainda.</p>
-            </div>
-            :
-            ''
+              ?
+              <div className="repos-notfound">
+                <p>Infelizmente esse usuário não possui nenhum {typereq} ainda.</p>
+              </div>
+              :
+              ''
           }
           {
             repos.map(repo => (
